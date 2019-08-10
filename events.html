@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="assets/js/jquery-3.4.1.js"></script>
+        <script src="assets/js/underscore.js"></script>
+        <script src = "assets/js/backbone.js"></script>
+    </head>
+
+    <body>
+
+        <span id="demo">
+            Just waiting for the trigger.
+        </span>
+
+        <script>
+        //  myVal is an object. Extending it with Backbone.events.
+            var myVal = _.extend({}, Backbone.Events);
+            console.log("Object is created");
+        //  Defining the event 'on'
+            myVal.on('myFunc', function() {
+                alert("An event was triggered");
+                document.getElementById("demo").innerHTML = "<h3>Hello Backbone world!!</h3>";
+            });
+
+
+        //  Now trigger the event.
+            myVal.trigger('myFunc');
+        </script>
+
+
+    </body>
+
+</html>
