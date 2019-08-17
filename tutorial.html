@@ -5,24 +5,90 @@
     </head>
 
     <body>
-        <div class="container">
-            
+        <div id="main-region" class="container">
+            <p>Here is static content. This will be replaced by our marionette app.</p>
         </div>
+
+        <script type="text/template" id="contact-list-item">
+            <p><%= firstName %> <%= lastName %> </p>
+        </script>
+
+        <script type="text/template" id="static-template">
+            <p>This will be rendered by our marionette app.</p>
+        </script>
+
+        <script type="text/template" id="contact-template">
+            <p> <%= firstName %> <%= lastName %> </p>
+        </script>
+
 
         <script src="assets/js/jquery-3.4.1.js"></script>
         <script src="assets/js/underscore.js"></script>
-        <script src = "assets/js/backbone.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.4.0/backbone.js"></script>
+        <!-- <script src = "assets/js/backbone.js"></script> -->
         <!-- <script src="./assets/js/backbone.radio.js"></script> -->
-        <!-- <script src="./assets/js/backbone.marionette.js"></script> -->
-        <script src="./assets/js/backbone.marionette.min_0_10_2.js"></script>
+        <script src="./assets/js/backbone.marionette.js"></script>
+
 
         <script type="text/javascript">
             var Marionette = Backbone.Marionette;
-            var ContactManager = new Marionette.Application();
+            var ContactManager = new Backbone.Marionette.Application();
+            
+            ContactManager.addRegions({
+                mainRegion: "#main-region"
+            })
+
+            ContactManager.Contact = Backbone.Model.extend({}); //  Marionettte does not have its own model extended.
+
+            ContactManager.ContactCollection = Backbone.Collection.extend({
+                model: ContactManager.Contact
+            });
+
+            ContactManager.ContactItemView = Marionette.ItemView.extend({
+                tagName: "li",
+                template: "#contact-list-item"
+            });
+
+            ContactManager.ContactsView = Marionette.CollectionView.extend({
+                tagName: "ul",
+                itemView: ContactManager.ContactItemView
+            });
+
+            ContactManager.ContactView = Marionette.ItemView.extend({
+                template: "#contact-template"
+            });
+
+            ContactManager.StaticView = Marionette.ItemView.extend({
+                template: "#static-template"
+            });
 
             ContactManager.on("initialize:after", function(){
-                console.log("ContactManager has started");
-            }); //  this is define before the application is started.
+
+                var contacts = new ContactManager.ContactCollection([
+                    {
+                        firstName: "Alice",
+                        lastName: "Artem",
+                        phoneNumber: "1234567890"
+                    },
+                    {
+                        firstName: "Bob",
+                        lastName: "Brigham",
+                        phoneNumber: "0987654321"
+                    },
+                    {
+                        firstName: "Charlie",
+                        lastName: "Campbell",
+                        phoneNumber: "6574839201"
+                    }
+                ]);
+
+                var contactsListView = new ContactManager.ContactsView({
+                    collection: contacts
+                });
+
+                ContactManager.mainRegion.show(contactsListView);
+
+            }); //  this is defined(not executed!) before the application is started.
 
             ContactManager.start();
 
