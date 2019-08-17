@@ -19,7 +19,6 @@ function createCompetitiveEvent(competitve, elementId) {
  * In this event an list of URLs of competitive/interview-prep algo platforms would be added.
  */
 function addCompetitiveList(id) {
-
     competitive = _.extend({}, Backbone.Events);
     console.log("competitive pobject created");
     var elementId = "#" + id;
@@ -50,3 +49,10 @@ function debug(msg) {
         console.log(msg);
     }
 }
+
+
+/**
+ * Model is same as a 'class' in OOPS.
+ */
+var List = Backbone.Model.extend(function () {
+});

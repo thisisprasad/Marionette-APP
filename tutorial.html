@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Marionette | tutorial</title>
+    </head>
+
+    <body>
+        <div class="container">
+            
+        </div>
+
+        <script src="assets/js/jquery-3.4.1.js"></script>
+        <script src="assets/js/underscore.js"></script>
+        <script src = "assets/js/backbone.js"></script>
+        <!-- <script src="./assets/js/backbone.radio.js"></script> -->
+        <!-- <script src="./assets/js/backbone.marionette.js"></script> -->
+        <script src="./assets/js/backbone.marionette.min_0_10_2.js"></script>
+
+        <script type="text/javascript">
+            var Marionette = Backbone.Marionette;
+            var ContactManager = new Marionette.Application();
+
+            ContactManager.on("initialize:after", function(){
+                console.log("ContactManager has started");
+            }); //  this is define before the application is started.
+
+            ContactManager.start();
+
+        </script>
+        
+    </body>
+</html>
