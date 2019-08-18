@@ -24,10 +24,15 @@
 <!-- |||||||||||||||||||||||||||||||||||||CDNs||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
         <script src="assets/js/jquery-3.4.1.js"></script>
         <script src="assets/js/underscore.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.2.2/backbone.js"></script>
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.2.2/backbone.js"></script> -->
+        <script src="assets/js/backbone.js"></script>
         <!-- <script src = "assets/js/backbone.js"></script> -->
         <!-- <script src="./assets/js/backbone.radio.js"></script> -->
         <script src="./assets/js/backbone.marionette.min_1_7_0.js"></script>
+
+        <script src="./assets/js/app.js"></script>
+        <script src="./assets/js/entities/contact.js"></script>
+
 <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
 
 
@@ -65,23 +70,25 @@
 
             ContactManager.on("initialize:after", function(){
 
-                var contacts = new ContactManager.ContactCollection([
-                    {
-                        firstName: "Alice",
-                        lastName: "Artem",
-                        phoneNumber: "1234567890"
-                    },
-                    {
-                        firstName: "Bob",
-                        lastName: "Brigham",
-                        phoneNumber: "0987654321"
-                    },
-                    {
-                        firstName: "Charlie",
-                        lastName: "Campbell",
-                        phoneNumber: "6574839201"
-                    }
-                ]);
+                var contacts = ContactManager.request("contact:entities");
+                
+                // var contacts = new ContactManager.Entities.ContactCollection([
+                //     {
+                //         firstName: "Alice",
+                //         lastName: "Artem",
+                //         phoneNumber: "1234567890"
+                //     },
+                //     {
+                //         firstName: "Bob",
+                //         lastName: "Brigham",
+                //         phoneNumber: "0987654321"
+                //     },
+                //     {
+                //         firstName: "Charlie",
+                //         lastName: "Campbell",
+                //         phoneNumber: "6574839201"
+                //     }
+                // ]);
 
                 var contactsListView = new ContactManager.ContactsView({
                     collection: contacts
