@@ -1,0 +1,13 @@
+Literature Review:
+First of all what is it??
+-Overview of the project.
+
+Give an overview of our feature:
+	Common search feature.
+	Searching at one place for all entities
+	Search and results at one place.
+	various criterion to search for.
+	
+	
+Technoloogies used:
+	Spring MVC, MarionetteJS, BackboneJS, Kendo, SVN
